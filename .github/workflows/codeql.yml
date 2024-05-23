@@ -90,7 +90,6 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
   build:
-    needs: analyze
     runs-on: windows-latest
 
     steps:
@@ -103,7 +102,7 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-
+      working-directory: ./MyConsoleApp
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
