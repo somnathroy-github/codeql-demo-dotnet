@@ -105,6 +105,7 @@ jobs:
       working-directory: ./MyConsoleApp
     - name: Build
       run: dotnet build --configuration Release --no-restore
-
+      working-directory: ./MyConsoleApp
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      working-directory: ./MyConsoleApp.Tests
