@@ -115,6 +115,11 @@ jobs:
       with:
         file: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
         fail_ci_if_error: false
+    - name: Archive Code Coverage Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: CodeCoverage
+        path: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
     - name: Publish artifacts
       uses: actions/upload-artifact@v2
       with:
