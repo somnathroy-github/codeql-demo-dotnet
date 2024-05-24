@@ -107,7 +107,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: ./MyConsoleApp
     - name: Test with Code Coverage
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/coverage.cobertura.xml
       working-directory: ./MyConsoleApp.Tests
 
     - name: Publish Code Coverage Results
