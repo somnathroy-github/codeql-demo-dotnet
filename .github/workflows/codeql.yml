@@ -110,18 +110,18 @@ jobs:
       run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/coverage.cobertura.xml
       working-directory: ./MyConsoleApp.Tests
 
-    - name: Publish Code Coverage Results
-      uses: codecov/codecov-action@v2
-      with:
-        file: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
-        fail_ci_if_error: false
+    #- name: Publish Code Coverage Results
+    #  uses: codecov/codecov-action@v2
+    #  with:
+    #    file: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
+    #    fail_ci_if_error: false
     - name: Archive Code Coverage Results
       uses: actions/upload-artifact@v2
       with:
         name: CodeCoverage
         path: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
-    - name: Publish artifacts
+    - name: Publish Test Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: MyConsoleApp
-        path: ./MyConsoleApp/bin/Release/
+        name: TestResults
+        path: ./MyConsoleApp.Tests/TestResults/
