@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pbV6xT2wiAKG5Ki9WkZhkSeChDWZuYF317+PRUMjYnYMbpMklTZCvpzvxPDBFFHmeSR02jXxcrdME2MqDZod8A==",
+  "dgSpecHash": "ZoUInaOW+4JHU0EcMB6VKY/gaEzeIsMK4bTxpTl+RVdST05wyJ6a1uB7j7XB+/l4ajnEpnyk2AhyGe8jHyQhpw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\somroy\\Projects\\MyConsoleApp\\MyConsoleApp.csproj",
+  "projectFilePath": "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\MyConsoleApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

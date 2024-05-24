@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\somroy\\Projects\\MyConsoleApp\\MyConsoleApp.csproj": {}
+    "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\MyConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\somroy\\Projects\\MyConsoleApp\\MyConsoleApp.csproj": {
+    "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\MyConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\somroy\\Projects\\MyConsoleApp\\MyConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\MyConsoleApp.csproj",
         "projectName": "MyConsoleApp",
-        "projectPath": "C:\\Users\\somroy\\Projects\\MyConsoleApp\\MyConsoleApp.csproj",
+        "projectPath": "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\MyConsoleApp.csproj",
         "packagesPath": "C:\\Users\\somroy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\somroy\\Projects\\MyConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\somroy\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

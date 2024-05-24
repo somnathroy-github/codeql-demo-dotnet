@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Oz/SsJWNAS7hsy14mJxjqwRYRgttRSg/5EC6L+Hvbd9kQUkjzJoyL7F16MoXxNma3aCXPHVAG8bfCuRYwzx1mw==",
+  "dgSpecHash": "4kHCYF9E0T4DSseMEpBTmxfQsQsf60k3wG1/GZMH4ppDbtuCtbNqKtiM9zOtzEm1ts2lHEZKTKD2ioVwEk9Hsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\somroy\\Projects\\MyConsoleApp.Tests\\MyConsoleApp.Tests.csproj",
+  "projectFilePath": "C:\\Users\\somroy\\Projects\\codeql-demo-dotnet\\MyConsoleApp.Tests\\MyConsoleApp.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\somroy\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\somroy\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
