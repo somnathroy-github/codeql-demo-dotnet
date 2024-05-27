@@ -105,24 +105,21 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Install dependencies
+    - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./MyConsoleApp
-    - name: Install Coverlet
-      run: dotnet tool install --global coverlet.console
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      working-directory: ./MyConsoleApp
-    - name: Test with Code Coverage
 
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-      working-directory: ./MyConsoleApp.Tests
-    - name: Install report henerator
-      run: dotnet tool install -g dotnet-reportgenerator-globaltool
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test with coverage
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage/
+
+    - name: Install ReportGenerator tool
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Generate coverage report
-      run: reportgenerator -reports:../MyConsoleApp.Tests/coverage/coverage.opencover.xml -targetdir:coverage -reporttypes:Html
-    
+      run: reportgenerator -reports:./MyConsoleApp.Tests/coverage/coverage.opencover.xml -targetdir:coverage -reporttypes:Html
+
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
       with:
