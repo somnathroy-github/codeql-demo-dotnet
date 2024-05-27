@@ -128,7 +128,8 @@ jobs:
       working-directory: ./MyConsoleApp.Tests
     - name: Check coverage percentage
       run: |
-       coveragePercentage=$(grep -o 'Line coverage: [0-9]*\.[0-9]*%' coverage/Summary.txt | grep -o '[0-9]*\.[0-9]*')
+       $coverageLine = Select-String -Path coverage/Summary.txt -Pattern 'Line coverage: [0-9]*\.[0-9]*%'
+       $coveragePercentage = $coverageLine -replace 'Line coverage: ', '' -replace '%', ''
        echo "Coverage percentage: $coveragePercentage%"
        shell: bash
     - name: If code coverage greater than 80 percent
