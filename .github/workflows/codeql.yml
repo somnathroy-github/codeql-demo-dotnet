@@ -126,12 +126,12 @@ jobs:
     - name: Generate coverage report
       run: reportgenerator -reports:./coverage/coverage.opencover.xml -targetdir:./coverage -reporttypes:TextSummary
       working-directory: ./MyConsoleApp.Tests
-    - name: Check coverage percentage
+    - name: Extract coverage percentage
+      shell: pwsh
       run: |
        $coverageLine = Select-String -Path ./coverage/Summary.txt -Pattern 'Line coverage: [0-9]*\.[0-9]*%'
        $coveragePercentage = $coverageLine -replace 'Line coverage: ', '' -replace '%', ''
-       echo "Coverage percentage: $coveragePercentage%"
-       shell: bash
+       echo "Coverage Percentage: $coveragePercentage"
     - name: If code coverage greater than 80 percent
       run: |
          if (( $(echo "$coveragePercentage < 80.0" | bc -l) )); then
