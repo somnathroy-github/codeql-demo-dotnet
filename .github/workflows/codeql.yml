@@ -107,19 +107,18 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: ./MyConsoleApp
     - name: Test with Code Coverage
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/coverage.cobertura.xml
+      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       working-directory: ./MyConsoleApp.Tests
+    - name: Install report henerator
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-    - name: Publish Code Coverage Results
-      uses: codecov/codecov-action@v2
-      with:
-        file: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
-        fail_ci_if_error: false
-    - name: Archive Code Coverage Results
+    - name: Generate code coverage report
+      run: reportgenerator -reports:**/coverage.opencover.xml -targetdir:coverage -reporttypes:Html
+    - name: Upload code coverage report
       uses: actions/upload-artifact@v2
       with:
-        name: CodeCoverage
-        path: ./MyConsoleApp.Tests/coverage/coverage.cobertura.xml
+          name: code-coverage-report
+          path: coverage
     - name: Publish artifacts
       uses: actions/upload-artifact@v2
       with:

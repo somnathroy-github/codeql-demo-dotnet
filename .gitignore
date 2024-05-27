@@ -1,1 +1,6 @@
 .vs/
+coverageresults/
+coverage.json
+TestResults/
+
+MyConsoleApp/.vs/

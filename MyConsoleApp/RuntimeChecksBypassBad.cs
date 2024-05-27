@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 [Serializable]
+[ExcludeFromCodeCoverage]
 public class PersonBad : ISerializable
 {
     public int Age;
