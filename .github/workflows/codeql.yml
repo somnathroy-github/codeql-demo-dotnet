@@ -124,7 +124,7 @@ jobs:
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Generate coverage report
-      run: reportgenerator -reports:./coverage/coverage.opencover.xml -targetdir:./coverage -reporttypes:Html,TextSummary
+      run: reportgenerator -reports:./coverage/coverage.opencover.xml -targetdir:./coverage -reporttypes:Html -reporttypes:TextSummary
       working-directory: ./MyConsoleApp.Tests
     - name: Check coverage percentage
       run: |
