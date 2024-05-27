@@ -138,6 +138,7 @@ jobs:
         Write-Output "Code coverage is below 80%"
         exit 1
         }
+      shell: pwsh
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
       with:
