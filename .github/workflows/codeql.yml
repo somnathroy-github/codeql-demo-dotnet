@@ -95,42 +95,6 @@ jobs:
         name: codeql-results
         path: /home/runner/work/codeql-demo-dotnet/results/csharp.sarif
   build:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore
-      working-directory:  ./MyConsoleApp/
-
-    - name: Build
-      run: dotnet build --no-restore
-
-    - name: Test with coverage
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage/
-      working-directory: ./MyConsoleApp.Tests
-
-    - name: Install ReportGenerator tool
-      run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-    - name: Generate coverage report
-      run: reportgenerator -reports:./MyConsoleApp.Tests/coverage/coverage.opencover.xml -targetdir:coverage -reporttypes:Html
-      name: .NET Core CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build:
 
     runs-on: windows-latest
 
