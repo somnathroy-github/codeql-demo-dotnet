@@ -89,24 +89,32 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+    - name: Upload SARIF artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: codeql-results
+        path: /home/runner/work/codeql-demo-dotnet/results/csharp.sarif
   build:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
 
     - name: Install dependencies
       run: dotnet restore
       working-directory: ./MyConsoleApp
+    - name: Install Coverlet
+      run: dotnet tool install --global coverlet.console
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ./MyConsoleApp
     - name: Test with Code Coverage
+
       run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       working-directory: ./MyConsoleApp.Tests
     - name: Install report henerator
