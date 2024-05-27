@@ -124,9 +124,20 @@ jobs:
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Generate coverage report
-      run: reportgenerator -reports:./coverage/coverage.opencover.xml -targetdir:./coverage -reporttypes:Html
+      run: reportgenerator -reports:./coverage/coverage.opencover.xml -targetdir:./coverage -reporttypes:Html,TextSummary
       working-directory: ./MyConsoleApp.Tests
-
+    - name: Check coverage percentage
+      run: |
+       coveragePercentage=$(grep -o 'Line coverage: [0-9]*\.[0-9]*%' coverage/Summary.txt | grep -o '[0-9]*\.[0-9]*')
+       echo "Coverage percentage: $coveragePercentage%"
+       shell: bash
+    - name: If code coverage greater than 80 percent
+      run: |
+         if (( $(echo "$coveragePercentage < 80.0" | bc -l) )); then
+         echo "Code coverage is below 80%"
+         exit 1
+         fi
+         shell: bash
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
       with:
