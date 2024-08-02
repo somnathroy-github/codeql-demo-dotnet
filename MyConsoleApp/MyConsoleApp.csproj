@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-    <PackageReference Include="Duende.IdentityServer" Version="6.1.7" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.1.8" />
   </ItemGroup>
 
 </Project>
