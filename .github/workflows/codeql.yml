@@ -87,7 +87,29 @@ jobs:
     - name: Send notification to Teams
       if: env.is_pr == 'true'
       run: |
-        curl -H 'Content-Type: application/json' -d '{"text": "A new PR build has been triggered."}' ${{ secrets.TEAMS_WEBHOOK_URL }}
+        curl -H 'Content-Type: application/json' \
+             -d '{
+                   "title": "GitHub Actions Notification",
+                   "text": "A new PR build has been triggered.",
+                   "sections": [
+                     {
+                       "activityTitle": "Repository: ${{ github.repository }}",
+                       "activitySubtitle": "Branch: ${{ github.ref }}",
+                       "activityText": "Pull Request: ${{ github.event.pull_request.title }}",
+                       "facts": [
+                         {
+                           "name": "PR Number",
+                           "value": "#${{ github.event.pull_request.number }}"
+                         },
+                         {
+                           "name": "Author",
+                           "value": "${{ github.event.pull_request.user.login }}"
+                         }
+                       ]
+                     }
+                   ]
+                 }' \
+             ${{ secrets.TEAMS_WEBHOOK_URL }}
  
     - name: Restore dependencies
       run: dotnet restore
