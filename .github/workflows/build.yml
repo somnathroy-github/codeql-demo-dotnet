@@ -20,6 +20,11 @@ jobs:
           dotnet restore MyConsoleApp/MyConsoleApp.csproj
           dotnet restore MyConsoleApp.Tests/MyConsoleApp.Tests.csproj
 
+    - name: Restore dependencies
+      run: |
+          dotnet restore MyConsoleApp/MyConsoleApp.csproj
+          dotnet restore MyConsoleApp.Tests/MyConsoleApp.Tests.csproj
+
     - name: Build
       run: dotnet build MyConsoleApp/MyConsoleApp.csproj --configuration Release
 
@@ -31,12 +36,12 @@ jobs:
     
     - name: Set coverage file path
       id: set-coverage-path
-      run: echo "::set-output name=coverage_path::$(find ./MyConsoleApp.Tests/TestResults -name 'coverage.cobertura.xml')"
+      run: echo "coverage_path=$(find ./MyConsoleApp.Tests/TestResults -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
 
     - name: Generate Code Coverage Summary
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
-        entryPoint: '${{ steps.set-coverage-path.outputs.coverage_path }}' # Use the dynamically found path
+        entryPoint: ${{ env.coverage_path }} # Use the dynamically found path
         badge: false
         fail_below_min: false
         format: text
