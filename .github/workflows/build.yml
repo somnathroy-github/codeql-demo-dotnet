@@ -26,6 +26,9 @@ jobs:
     - name: Test with coverage
       run: dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
+    - name: List coverage files
+      run: find . -name 'coverage.cobertura.xml'
+      
     - name: Generate Code Coverage Summary
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
