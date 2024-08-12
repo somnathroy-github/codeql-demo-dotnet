@@ -1,0 +1,32 @@
+name: .NET Code Coverage
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x' # Change this to your .NET version
+
+    - name: Restore dependencies
+      run: |
+          dotnet restore .\MyConsoleApp\MyConsoleApp.csproj
+          dotnet restore .\MyConsoleApp.Tests\MyConsoleApp.Tests.csproj
+
+    - name: Build
+      run: dotnet build .\MyConsoleApp\MyConsoleApp.csproj --configuration Release
+
+    - name: Test with coverage
+      run: dotnet test .\MyConsoleApp.Tests\MyConsoleApp.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
+
+    - name: Generate Code Coverage Summary
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        coverage-reports: '**/coverage.cobertura.xml' # Adjust this path if necessary
