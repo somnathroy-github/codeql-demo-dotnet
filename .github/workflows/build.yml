@@ -20,11 +20,6 @@ jobs:
           dotnet restore MyConsoleApp/MyConsoleApp.csproj
           dotnet restore MyConsoleApp.Tests/MyConsoleApp.Tests.csproj
 
-    - name: Restore dependencies
-      run: |
-          dotnet restore MyConsoleApp/MyConsoleApp.csproj
-          dotnet restore MyConsoleApp.Tests/MyConsoleApp.Tests.csproj
-
     - name: Build
       run: dotnet build MyConsoleApp/MyConsoleApp.csproj --configuration Release
 
