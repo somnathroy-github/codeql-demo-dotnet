@@ -33,8 +33,8 @@ jobs:
         dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
         dotnet tool install -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:"MyConsoleApp.Tests/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
-        - name: List coverage files
-        run: find . -name 'coverage.cobertura.xml'
+    - name: List coverage files
+      run: find . -name 'coverage.cobertura.xml'
       
     - name: Set coverage file path
       id: set-coverage-path
