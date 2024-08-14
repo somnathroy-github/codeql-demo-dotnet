@@ -52,3 +52,6 @@ jobs:
         indicators: true
         output: console
         thresholds: 75 
+      env:
+        DOTNET_ROOT: /usr/share/dotnet
+        coverage_path: ${{ env.coverage_path }}
