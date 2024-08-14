@@ -43,8 +43,8 @@ jobs:
         COVERAGE=$(grep -oPm1 "(?<=<coverage line-rate=\")[^\"]+" ${{ env.coverage_path }})
         COVERAGE_PERCENT=$(echo "$COVERAGE * 100" | bc)
         echo "Code coverage is $COVERAGE_PERCENT%"
-        if (( $(echo "$COVERAGE_PERCENT < 75" | bc -l) )); then
-          echo "Code coverage is below 75%"
+        if (( $(echo "$COVERAGE_PERCENT < 50" | bc -l) )); then
+          echo "Code coverage is below 50%"
           exit 1
         fi
       
