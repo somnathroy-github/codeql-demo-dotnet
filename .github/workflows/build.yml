@@ -35,11 +35,18 @@ jobs:
 
     - name: Check code coverage
       run: |
-        COVERAGE=$(grep -oPm1 "(?<=<coverage line-rate=\")[^\"]+" ${{ env.coverage_path }})
-        COVERAGE_PERCENT=$(echo "$COVERAGE * 100" | bc)
-        echo "Code coverage is $COVERAGE_PERCENT%"
-        if (( $(echo "$COVERAGE_PERCENT < 50" | bc -l) )); then
-          echo "Code coverage is below 50%"
+        LINE_RATE=$(grep -oPm1 "(?<=<coverage line-rate=\")[^\"]+" ${{ env.coverage_path }})
+        BRANCH_RATE=$(grep -oPm1 "(?<=branch-rate=\")[^\"]+" ${{ env.coverage_path }})
+        LINE_RATE_PERCENT=$(echo "$LINE_RATE * 100" | bc)
+        BRANCH_RATE_PERCENT=$(echo "$BRANCH_RATE * 100" | bc)
+        echo "Line rate coverage is $LINE_RATE_PERCENT%"
+        echo "Branch rate coverage is $BRANCH_RATE_PERCENT%"
+        if (( $(echo "$LINE_RATE_PERCENT < 50" | bc -l) )); then
+          echo "Line rate coverage is below 50%"
+          exit 1
+        fi
+        if (( $(echo "$BRANCH_RATE_PERCENT < 50" | bc -l) )); then
+          echo "Branch rate coverage is below 50%"
           exit 1
         fi
       
