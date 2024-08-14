@@ -33,12 +33,12 @@ jobs:
         dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
         dotnet tool install -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:"MyConsoleApp.Tests/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
-    - name: List coverage files
-      run: find . -name 'coverage.cobertura.xml'
+        - name: List TestResults directory
+        run: ls -R ./MyConsoleApp.Tests/TestResults
       
     - name: Set coverage file path
       id: set-coverage-path
-      run: echo "coverage_path=$(find ./MyConsoleApp.Tests/TestResults -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
+      run: echo "coverage_path=$(find ./MyConsoleApp.Tests -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
       
     - name: Generate Code Coverage Summary
       uses: irongut/CodeCoverageSummary@v1.3.0
@@ -51,7 +51,7 @@ jobs:
         hide_complexity: false
         indicators: true
         output: console
-        thresholds: 75 
+        thresholds: 75
       env:
         DOTNET_ROOT: /usr/share/dotnet
         coverage_path: ${{ env.coverage_path }}
