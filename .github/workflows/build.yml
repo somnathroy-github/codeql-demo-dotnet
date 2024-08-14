@@ -29,25 +29,6 @@ jobs:
       run: dotnet build MyConsoleApp/MyConsoleApp.csproj --configuration Release
 
     - name: Test with coverage
-      run: dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
-
-    - name: List files with permissions
-      run: ls -la ./MyConsoleApp.Tests/TestResults/
-    
-    
-    - name: Set coverage file path
-      id: set-coverage-path
-      run: echo "coverage_path=$(find ./MyConsoleApp.Tests/TestResults -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
-
-    - name: Generate Code Coverage Summary
-      uses: irongut/CodeCoverageSummary@v1.3.0
-      with:
-        entryPoint: ${{ env.coverage_path }} # Use the dynamically found path
-        badge: false
-        fail_below_min: false
-        format: text
-        hide_branch_rate: false
-        hide_complexity: false
-        indicators: true
-        output: console
-        thresholds: 50 75
+      run: |
+        dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
+        reportgenerator -reports:"MyConsoleApp.Tests\coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
