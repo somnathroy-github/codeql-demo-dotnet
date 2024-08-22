@@ -26,20 +26,7 @@ jobs:
     - name: Test with coverage
       run: |
         dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
-        dotnet tool install -g dotnet-reportgenerator-globaltool
-        reportgenerator -reports:"MyConsoleApp.Tests/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:XMLSummary
-
-    - name: Create artifacts directory
-      run: mkdir -p artifacts
-
-    - name: Move coverage report
-      run: mv coverage-report/Summary.xml artifacts/Integration.Tests.xml
-
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: artifacts
+        mv MyConsoleApp.Tests/coverage.cobertura.xml MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
       
     - name: Set coverage file path
       id: set-coverage-path
