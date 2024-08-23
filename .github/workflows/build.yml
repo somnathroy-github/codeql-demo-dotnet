@@ -27,7 +27,23 @@ jobs:
       run: |
         dotnet test MyConsoleApp.Tests/MyConsoleApp.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura 
         mv MyConsoleApp.Tests/coverage.cobertura.xml MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
-      
+
+    - name: Cache coverage report
+      uses: actions/cache@v3
+      with:
+        path: UnitTestcoverage.cobertura.xml
+        key: Linux-Unitcoverage-${{ runner.os }}-${{ hashFiles('**/UnitTestcoverage.cobertura.xml') }}
+        restore-keys: |
+            Linux-Unitcoverage-${{ runner.os }}-
+
+    - name: Restore Unit Test coverage report
+      uses: actions/cache@v3
+      with:
+        path: UnitTestcoverage.cobertura.xml
+        key: Linux-Unitcoverage-${{ runner.os }}-${{ hashFiles('**/UnitTestcoverage.cobertura.xml') }}
+        restore-keys: |
+            Linux-Unitcoverage-${{ runner.os }}-
+
     - name: Set coverage file path
       id: set-coverage-path
       run: echo "coverage_path=$(find ./MyConsoleApp.Tests -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
