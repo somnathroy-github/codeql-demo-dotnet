@@ -35,6 +35,12 @@ jobs:
         key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
         restore-keys: |
           ${{ runner.os }}-Unitcoverage-
+        enableCrossOsArchive: false
+        fail-on-cache-miss: false
+        lookup-only: false
+        save-always: false
+      env:
+        DOTNET_ROOT: /usr/share/dotnet
   
     - name: Restore Unit Test coverage report
       uses: actions/cache@v4
@@ -43,3 +49,9 @@ jobs:
         key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
         restore-keys: |
           ${{ runner.os }}-Unitcoverage-
+        enableCrossOsArchive: false
+        fail-on-cache-miss: false
+        lookup-only: false
+        save-always: false
+      env:
+        DOTNET_ROOT: /usr/share/dotnet
