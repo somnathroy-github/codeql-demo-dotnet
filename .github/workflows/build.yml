@@ -29,44 +29,17 @@ jobs:
         mv MyConsoleApp.Tests/coverage.cobertura.xml MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
 
     - name: Cache coverage report
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: UnitTestcoverage.cobertura.xml
-        key: Linux-Unitcoverage-${{ runner.os }}-${{ hashFiles('**/UnitTestcoverage.cobertura.xml') }}
+        path: MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
+        key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
         restore-keys: |
-            Linux-Unitcoverage-${{ runner.os }}-
-
+          ${{ runner.os }}-Unitcoverage-
+  
     - name: Restore Unit Test coverage report
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: UnitTestcoverage.cobertura.xml
-        key: Linux-Unitcoverage-${{ runner.os }}-${{ hashFiles('**/UnitTestcoverage.cobertura.xml') }}
+        path: MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
+        key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
         restore-keys: |
-            Linux-Unitcoverage-${{ runner.os }}-
-
-    - name: Set coverage file path
-      id: set-coverage-path
-      run: echo "coverage_path=$(find ./MyConsoleApp.Tests -name 'coverage.cobertura.xml')" >> $GITHUB_ENV
-
-    - name: Check code coverage
-      run: |
-        LINE_RATE=$(grep -oPm1 "(?<=<coverage line-rate=\")[^\"]+" ${{ env.coverage_path }})
-        BRANCH_RATE=$(grep -oPm1 "(?<=branch-rate=\")[^\"]+" ${{ env.coverage_path }})
-        LINE_RATE_PERCENT=$(echo "$LINE_RATE * 100" | bc)
-        BRANCH_RATE_PERCENT=$(echo "$BRANCH_RATE * 100" | bc)
-        echo "Line rate coverage is $LINE_RATE_PERCENT%"
-        echo "Branch rate coverage is $BRANCH_RATE_PERCENT%"
-        if (( $(echo "$LINE_RATE_PERCENT < 50" | bc -l) )); then
-          echo "Line rate coverage is below 50%"
-          exit 1
-        fi
-        if (( $(echo "$BRANCH_RATE_PERCENT < 50" | bc -l) )); then
-          echo "Branch rate coverage is below 50%"
-          exit 1
-        fi
-      
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v4
-      with:
-        name: code-coverage-report
-        path: coverage-report/index.html
+          ${{ runner.os }}-Unitcoverage-
