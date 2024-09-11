@@ -32,43 +32,33 @@ jobs:
       uses: actions/cache@v4
       with:
         path: MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
-        key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
+        key: unit-test-results-${{ github.sha }}
         restore-keys: |
-          ${{ runner.os }}-Unitcoverage-
-        enableCrossOsArchive: false
-        fail-on-cache-miss: false
-        lookup-only: false
-        save-always: false
-      env:
-        DOTNET_ROOT: /usr/share/dotnet
+          unit-test-results-
   
     - name: Restore Unit Test coverage report
       uses: actions/cache@v4
       with:
         path: MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml
-        key: ${{ runner.os }}-Unitcoverage-${{ hashFiles('MyConsoleApp.Tests/UnitTestcoverage.cobertura.xml') }}
+        key: unit-test-results-${{ github.sha }}
         restore-keys: |
-          ${{ runner.os }}-Unitcoverage-
-        enableCrossOsArchive: false
-        fail-on-cache-miss: false
-        lookup-only: false
-        save-always: false
-      env:
-        DOTNET_ROOT: /usr/share/dotnet
+          unit-test-results-
+          
     - name: Remove cached artifacts 
       run: |
              gh extension install actions/gh-actions-cache
              REPO=${{ github.repository }}
              BRANCH=${{ github.ref_name }}
-             echo "Fetching list of cache key"
-             cacheKeys=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1 )
+             #echo "Fetching list of cache key"
+             #cacheKeys=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1 )
              set +e
              echo $BRANCH
-             for cacheKey in $cacheKeys
-             do
-               echo "Deleting cache key: $cacheKey"
+             #for cacheKey in $cacheKeys
+             #do
+               #echo "Deleting cache key: $cacheKey"
                gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
-             done
+             #done
+             gh actions-cache delete unit-test-results-${{ github.sha }} -R $REPO -B $BRANCH --confirm
              echo "Done"
       env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
